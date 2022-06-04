@@ -12,8 +12,8 @@
 
 class MinHeap {
     constructor() {
-        this.#heap = [];
-        this.#size = [];
+        this.heap = [];
+        this.size = [];
     }
 
     getParentIndex(index) {
@@ -29,14 +29,26 @@ class MinHeap {
     }
 
     getParent(index) {
-        return this.#heap[this.getParentIndex(index)];
+        return this.heap[this.getParentIndex(index)];
     }
 
     getLeftChild(index) {
-        return this.#heap[this.getLeftChildIndex(index)];
+        return this.heap[this.getLeftChildIndex(index)];
     }
 
     getRightChild(index) {
-        return this.#heap[this.getRightChildIndex(index)];
+        return this.heap[this.getRightChildIndex(index)];
+    }
+
+    hasParent(index) {
+        return this.getParentIndex(index) >= 0; // can't be less than zero bc 0 is the root
+    }
+
+    hasLeftChild(index) {
+        return this.getLeftChildIndex(index) < this.size;
+    }
+
+    hasRightChild(index) {
+        return this.getRightChildIndex(index) < this.size;
     }
 }
