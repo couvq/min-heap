@@ -27,4 +27,16 @@ class MinHeap {
     getRightChildIndex(index) {
         return 2 * index + 2;
     }
+
+    getParent(index) {
+        return this.#heap[this.getParentIndex(index)];
+    }
+
+    getLeftChild(index) {
+        return this.#heap[this.getLeftChildIndex(index)];
+    }
+
+    getRightChild(index) {
+        return this.#heap[this.getRightChildIndex(index)];
+    }
 }
