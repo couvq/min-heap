@@ -81,6 +81,34 @@ class MinHeap {
             index = this.getParentIndex(index); // move up to parent through while loop
         }
     }
+
+    removeMin() {
+        if(this.size === 0) throw new Error("Empty Heap");
+
+        let min = this.heap[0]; // element at 0 is always min
+        this.heap[0] = this.heap[this.size - 1]; // rightmost is our new root
+        this.size -= 1;
+        this.heapifyDown();
+        return min;
+    }
+
+    // start at root, get min of either left or right child, compare that min to current parent: 
+    // if min < parent -> swap them and heapifyDown()
+    heapifyDown() {
+        let index = 0; // always start at root
+        while(this.hasLeftChild(index)) { // fulfill complete tree property of being filled last level left->right
+            let smallerChildIndex = this.getLeftChildIndex(index);
+            if(this.hasRightChild(index) && this.getRightChild(index) < this.getLeftChild(index)) {
+                smallerChildIndex == this.getRightChildIndex(index);
+            }
+            if(this.heap[index] < this.heap[smallerChildIndex]) {
+                break; // element placed properly
+            } else {
+                this.swap(index, smallerChildIndex);
+            }
+            index = smallerChildIndex; // continue moving down heap
+        }
+    }
 }
 
 const minHeap = new MinHeap();
@@ -89,4 +117,9 @@ minHeap.insert(5);
 minHeap.insert(3);
 minHeap.insert(1);
 minHeap.insert(2);
-minHeap.printHeap();
+console.log(minHeap.removeMin()); // 1
+console.log(minHeap.removeMin()); // 2
+console.log(minHeap.removeMin()); // 3
+console.log(minHeap.removeMin()); // 5
+console.log(minHeap.removeMin()); // should throw error
+// minHeap.printHeap();
