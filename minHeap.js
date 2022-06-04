@@ -51,4 +51,8 @@ class MinHeap {
     hasRightChild(index) {
         return this.getRightChildIndex(index) < this.size;
     }
+
+    getMin() {
+        return this.heap[0]; // 0 index is always the root
+    }
 }
