@@ -13,7 +13,7 @@
 class MinHeap {
     constructor() {
         this.heap = [];
-        this.size = [];
+        this.size = 0;
     }
 
     getParentIndex(index) {
@@ -55,4 +55,38 @@ class MinHeap {
     getMin() {
         return this.heap[0]; // 0 index is always the root
     }
+
+    swap(index1, index2) {
+        let temp = this.heap[index1];
+        this.heap[index1] = this.heap[index2];
+        this.heap[index2] = temp;
+    }
+
+    printHeap() {
+        console.log(this.heap);
+    }
+
+    // Add a new element to the heap, adds to rightmost index, increments size, then calls heapifyUp()
+    insert(data) {
+        this.heap[this.size] = data;
+        this.size += 1;
+        this.heapifyUp();
+    }
+
+    // start at rightmost index, while it has a parent, check if child < parent: if it is swap, if not index = getParentIndex(index);
+    heapifyUp() {
+        let index = this.size - 1; // index we just inserted
+        while(this.hasParent(index) &&  this.getParent(index) > this.heap[index]) {
+            this.swap(index, this.getParentIndex(index));
+            index = this.getParentIndex(index); // move up to parent through while loop
+        }
+    }
 }
+
+const minHeap = new MinHeap();
+
+minHeap.insert(5);
+minHeap.insert(3);
+minHeap.insert(1);
+minHeap.insert(2);
+minHeap.printHeap();
