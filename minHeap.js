@@ -10,9 +10,21 @@
                          removeMin -> return 0th element (the min) and return it, then rightmost element becomes min, size-- and heapifyDown
 */
 
-class MinHeap(){
+class MinHeap {
     constructor() {
         this.#heap = [];
         this.#size = [];
+    }
+
+    getParentIndex(index) {
+        return Math.floor((index - 1)/ 2);
+    }
+
+    getLeftChildIndex(index) {
+        return 2 * index + 1;
+    }
+
+    getRightChildIndex(index) {
+        return 2 * index + 2;
     }
 }
